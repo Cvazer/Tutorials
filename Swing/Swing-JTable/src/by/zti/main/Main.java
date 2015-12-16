@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		new MainWindow();
-		//test 5
+		//test 6
 	}
 
 }
