@@ -30,4 +30,9 @@ public class Connector {
 		connected = connection.isValid(0);
 	}
 
+	public static void executeUpdate(String quary) throws SQLException {
+		Statement stm = connection.createStatement();
+		stm.executeUpdate(quary);
+	}
+
 }

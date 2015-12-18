@@ -16,17 +16,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
                   </items>
                 </Menu>
               </menus>
@@ -69,7 +59,7 @@
                                           <Insets top="10.0" />
                                        </GridPane.margin>
                                     </TextArea>
-                                    <Button fx:id="execute_btn" mnemonicParsing="false" onAction="#executeQuary" prefHeight="25.0" prefWidth="215.0" text="Execute Quary" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+                                    <Button fx:id="execute_btn" mnemonicParsing="false" onAction="#executeFromButton" prefHeight="25.0" prefWidth="215.0" text="Execute Quary" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                                  </children>
                               </GridPane>
                            </center>
@@ -80,11 +70,36 @@
                      <children>
                         <BorderPane prefHeight="453.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <center>
-                              <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
+                              <TabPane fx:id="tabPane" BorderPane.alignment="CENTER">
+                                 <tabs>
+                                    <Tab text="Table view">
+                                       <content>
+                                          <BorderPane>
+                                             <center>
+                                                <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                             </center>
+                                          </BorderPane>
+                                       </content>
+                                    </Tab>
+                                    <Tab text="List view">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <BorderPane prefHeight="424.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <center>
+                                                      <ListView fx:id="quaries_lv" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                                                   </center>
+                                                </BorderPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </Tab>
+                                 </tabs>
+                              </TabPane>
                            </center>
                         </BorderPane>
                      </children>
