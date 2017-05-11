@@ -17,7 +17,7 @@ public class Connector {
 		prop.setProperty("user", user);
 		prop.setProperty("password", pass);
 		connection = DriverManager.getConnection(URL, prop);
-		connected = connection.isValid(0);
+		connected = !connection.isClosed();
 	}
 	
 	public static ResultSet executeQuary(String SQL) throws SQLException{
@@ -27,7 +27,7 @@ public class Connector {
 	
 	public static void disconnect() throws SQLException{
 		connection.close();
-		connected = connection.isValid(0);
+		connected = !connection.isClosed();
 	}
 
 	public static void executeUpdate(String quary) throws SQLException {

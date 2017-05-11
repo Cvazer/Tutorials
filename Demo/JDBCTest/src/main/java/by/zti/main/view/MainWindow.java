@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 
 public class MainWindow extends Application {
 	private Stage primaryStage;
-	private FXMLLoader loader;
 	private AnchorPane root;
 	private Scene currentScene;
 
@@ -29,10 +28,8 @@ public class MainWindow extends Application {
 
 	private void loadRoot() {
 
-		loader = new FXMLLoader(MainWindow.class.getResource("MainWindow.fxml"));
-
 		try {
-			root = (AnchorPane) loader.load();
+			root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,33 +1,19 @@
 package by.zti.main.view;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import by.zti.main.Connector;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MainWindowController {
 	@FXML
@@ -56,19 +42,16 @@ public class MainWindowController {
 
 	@FXML
 	public void initialize() {
-		quaries_lv.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				if(e.getClickCount() == 2){
-					quary_ta.setText(quaries_lv.getSelectionModel().getSelectedItem());
-				}
+		quaries_lv.setOnMouseClicked(e -> {
+			if(e.getClickCount() == 2){
+				quary_ta.setText(quaries_lv.getSelectionModel().getSelectedItem());
 			}
 		});
 		quaries_lv.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
 			@Override
 			public ListCell<String> call(ListView<String> param) {
-				ListCell<String> cell = new ListCell<>();
-				ContextMenu menu = new ContextMenu();
+				final ListCell<String> cell = new ListCell<String>();
+				final ContextMenu menu = new ContextMenu();
 				MenuItem execute = new MenuItem();
 				execute.setText("Execute");
 				execute.setOnAction(new EventHandler<ActionEvent>() {
@@ -78,26 +61,17 @@ public class MainWindowController {
 				});
 				MenuItem delete = new MenuItem();
 				delete.setText("Delete");
-				delete.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						quaries_lv.getItems().remove(cell.getItem());
-					}
-				});
+				delete.setOnAction(event -> quaries_lv.getItems().remove(cell.getItem()));
 				menu.getItems().addAll(execute, delete);
 				cell.textProperty().bind(cell.itemProperty());
-				cell.emptyProperty().addListener(new ChangeListener<Boolean>() {
-					@Override
-					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
-							Boolean newValue) {
-						if(newValue){
-							cell.setContextMenu(null);
-						}else{
-							cell.setContextMenu(menu);
-						}
-						
-					}
-				});
+				cell.emptyProperty().addListener((observable, oldValue, newValue) -> {
+                    if(newValue){
+                        cell.setContextMenu(null);
+                    }else{
+                        cell.setContextMenu(menu);
+                    }
+
+                });
 				return cell;
 			}
 		});
@@ -173,12 +147,7 @@ public class MainWindowController {
 				String columnName = result.getMetaData().getColumnName(i);
 				TableColumn<ObservableMap<String, SimpleStringProperty>, String> column = new TableColumn<>(columnName);
 				column.setCellValueFactory(
-						new Callback<TableColumn.CellDataFeatures<ObservableMap<String,SimpleStringProperty>,String>, ObservableValue<String>>() {
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<ObservableMap<String, SimpleStringProperty>, String> param) {
-						return param.getValue().get(columnName);
-					}
-				});
+						param -> param.getValue().get(columnName));
 				table.getColumns().add(column);
 			}
 			table.setItems(data);
