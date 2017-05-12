@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.zti.main.view.MainWindowController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.18701095461658843" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <items>
+            <GridPane>
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="54.0" minWidth="2.0" prefWidth="4.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="114.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="113.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="0.0" prefWidth="5.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="169.0" minHeight="0.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="267.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="166.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="250.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="120.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="URL_tf" alignment="CENTER" promptText="Enter database URL here:" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="username_tf" alignment="CENTER" promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="password_tf" alignment="CENTER" promptText="Password" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <Button fx:id="connect_btn" minWidth="70.0" mnemonicParsing="false" onAction="#connect" text="Connect" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="5.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="disconnect_btn" alignment="CENTER_RIGHT" disable="true" minWidth="70.0" mnemonicParsing="false" onAction="#disconnect" text="Disconnect" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <TextArea fx:id="quary_ta" disable="true" prefHeight="200.0" prefWidth="200.0" promptText="Enter your SQL statement here:" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="3">
+                     <GridPane.margin>
+                        <Insets top="5.0" />
+                     </GridPane.margin>
+                  </TextArea>
+                  <Button fx:id="execute_btn" disable="true" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#executeFromButton" text="Execute" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+               </children>
+            </GridPane>
+            <BorderPane prefHeight="693.0" prefWidth="954.0">
+               <center>
+                  <TabPane fx:id="tabPane" prefHeight="693.0" prefWidth="715.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                    <tabs>
+                      <Tab text="Table View">
+                           <content>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <center>
+                                    <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                              </BorderPane>
+                           </content>
+                      </Tab>
+                      <Tab text="List View">
+                           <content>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <center>
+                                    <ListView fx:id="quaries_lv" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                              </BorderPane>
+                           </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </center>
+            </BorderPane>
+         </items>
+      </SplitPane>
+   </center>
+</BorderPane>

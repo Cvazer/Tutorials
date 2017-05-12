@@ -5,15 +5,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.util.Callback;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static by.zti.main.view.MainWindow.cfg;
 
 public class MainWindowController {
 	@FXML
@@ -38,46 +38,44 @@ public class MainWindowController {
 	private TabPane tabPane;
 	
 	private ObservableList<ObservableMap<String, SimpleStringProperty>> data;
-	private ObservableList<String> quaries;
+	private ObservableList<String> quarries;
 
 	@FXML
 	public void initialize() {
+		if(new File("config.xml").exists()){
+			URL_tf.setText(cfg.get("url"));
+			username_tf.setText(cfg.get("user"));
+			password_tf.setText(cfg.get("pass"));
+		}
+
 		quaries_lv.setOnMouseClicked(e -> {
 			if(e.getClickCount() == 2){
 				quary_ta.setText(quaries_lv.getSelectionModel().getSelectedItem());
 			}
 		});
-		quaries_lv.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-			@Override
-			public ListCell<String> call(ListView<String> param) {
-				final ListCell<String> cell = new ListCell<String>();
-				final ContextMenu menu = new ContextMenu();
-				MenuItem execute = new MenuItem();
-				execute.setText("Execute");
-				execute.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						executeQuary(cell.getItem());
-					}
-				});
-				MenuItem delete = new MenuItem();
-				delete.setText("Delete");
-				delete.setOnAction(event -> quaries_lv.getItems().remove(cell.getItem()));
-				menu.getItems().addAll(execute, delete);
-				cell.textProperty().bind(cell.itemProperty());
-				cell.emptyProperty().addListener((observable, oldValue, newValue) -> {
-                    if(newValue){
-                        cell.setContextMenu(null);
-                    }else{
-                        cell.setContextMenu(menu);
-                    }
-
-                });
-				return cell;
-			}
-		});
+		quaries_lv.setCellFactory(param -> {
+            final ListCell<String> cell = new ListCell<>();
+            final ContextMenu menu = new ContextMenu();
+            MenuItem execute = new MenuItem();
+            execute.setText("Execute");
+            execute.setOnAction(event -> executeQuary(cell.getItem()));
+            MenuItem delete = new MenuItem();
+            delete.setText("Delete");
+            delete.setOnAction(event -> quaries_lv.getItems().remove(cell.getItem()));
+            menu.getItems().addAll(execute, delete);
+            cell.textProperty().bind(cell.itemProperty());
+            cell.emptyProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue){
+					cell.setContextMenu(null);
+				}else{
+					cell.setContextMenu(menu);
+				}
+            });
+            return cell;
+        });
 		table.setItems(data);
 		data = FXCollections.observableArrayList();
-		quaries = FXCollections.observableArrayList();
+		quarries = FXCollections.observableArrayList();
 		quary_ta.setDisable(true);
 		execute_btn.setDisable(true);
 		disconnect_btn.setDisable(true);
@@ -85,6 +83,10 @@ public class MainWindowController {
 	
 	@FXML
 	public void exit(){
+		cfg.put("url", URL_tf.getText());
+		cfg.put("user", username_tf.getText());
+		cfg.put("pass", password_tf.getText());
+		disconnect();
 		System.exit(0);
 	}
 
@@ -109,14 +111,14 @@ public class MainWindowController {
 	public void executeFromButton(){
 		String sql = quary_ta.getText();
 		boolean allowed = true;
-		for(String s: quaries){
+		for(String s: quarries){
 			if(s.toLowerCase().contentEquals(sql.toLowerCase())){
 				allowed = false;
 				break;
 			}
 		}
 		if(allowed){
-			quaries.add(sql);
+			quarries.add(sql);
 		}
 		executeQuary(sql);
 	}
@@ -126,7 +128,6 @@ public class MainWindowController {
 			table.getColumns().clear();
 			data.clear();
 			sql = sql.toLowerCase();
-			System.out.println(sql);
 			if(sql.contains("insert")||sql.contains("update")||sql.contains("delete")||sql.contains("ddl")){
 				Connector.executeUpdate(sql);
 				Alert a = new Alert(AlertType.INFORMATION);
@@ -151,19 +152,21 @@ public class MainWindowController {
 				table.getColumns().add(column);
 			}
 			table.setItems(data);
-			quaries_lv.setItems(quaries);
+			quaries_lv.setItems(quarries);
 			tabPane.getSelectionModel().selectFirst();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			Alert a = new Alert(AlertType.ERROR);
 			a.setContentText("SQL eqception has oquered");
 			a.show();
-			for(String s: quaries){
+			String toRemove = "";
+			for(String s: quarries){
 				if(s.toLowerCase().contentEquals(sql)){
-					quaries.remove(s);
+					toRemove = s;
 				}
 			}
-			quaries_lv.setItems(quaries);
+			if(!toRemove.contentEquals("")){quarries.remove(toRemove);}
+			quaries_lv.setItems(quarries);
 		}
 	}
 

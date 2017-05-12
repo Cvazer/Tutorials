@@ -1,41 +1,28 @@
 package by.zti.main.view;
 
-import java.io.IOException;
-
+import by.zti.main.serializer.Serializer;
+import by.zti.main.serializer.SimpleXmlConfig;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class MainWindow extends Application {
-	private Stage primaryStage;
-	private AnchorPane root;
-	private Scene currentScene;
+	static SimpleXmlConfig cfg = new SimpleXmlConfig();
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
-	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("JDBC-MYSQL Test App");
-
-		loadRoot();
-		
-	}
-
-	private void loadRoot() {
-
-		try {
-			root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		currentScene = new Scene(root);
-		primaryStage.setScene(currentScene);
+	public void start(Stage primaryStage) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
+		primaryStage.setScene(new Scene(root, 1280, 720));
 		primaryStage.show();
-
 	}
 }

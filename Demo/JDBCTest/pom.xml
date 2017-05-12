@@ -12,11 +12,23 @@
 			<version>4.12</version>
 		</dependency>
 		<dependency>
+			<groupId>zti-utils</groupId>
+			<artifactId>zti-utils</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.38</version>
 		</dependency>
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>zti-utils</id>
+			<name>zti-utils</name>
+			<url>file://${project.basedir}/libs</url>
+		</repository>
+	</repositories>
 	<build>
 		<pluginManagement>
 			<plugins>
