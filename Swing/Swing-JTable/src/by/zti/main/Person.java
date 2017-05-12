@@ -1,19 +1,19 @@
 package by.zti.main;
 
-public class Person {
+class Person {
 	private String name;
 	private String surname;
 	
-	public String getSurname() {
+	String getSurname() {
 		return surname;
 	}
-	public void setSurname(String surname) {
+	void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public String getName() {
+	String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	void setName(String name) {
 		this.name = name;
 	}
 

@@ -7,23 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb8057e-cb6d-401a-9099-b7639d9d73be" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/zti-utils/zti-utils/1.0.4/zti-utils-1.0.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/JDBCTest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__zti_utils_zti_utils_1_0_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/zti_utils.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/MainWindow.fxml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deploy/download-and-run.rar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deploy/lib/hamcrest-core-1.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deploy/lib/junit-4.12.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deploy/lib/mysql-connector-java-5.1.38.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deploy/simple-fx-jdbc-app.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/by/zti/main/view/SqlCellFactory.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JDBCTest.iml" afterPath="$PROJECT_DIR$/JDBCTest.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/zti/main/view/MainWindow.java" afterPath="$PROJECT_DIR$/src/main/java/by/zti/main/view/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/zti/main/view/MainWindowController.java" afterPath="$PROJECT_DIR$/src/main/java/by/zti/main/view/MainWindowController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -709,12 +693,20 @@
       <workItem from="1494507938515" duration="1023000" />
       <workItem from="1494509590461" duration="5121000" />
       <workItem from="1494529417075" duration="87000" />
-      <workItem from="1494575558599" duration="402000" />
+      <workItem from="1494575558599" duration="720000" />
     </task>
+    <task id="LOCAL-00001" summary="cfg update">
+      <created>1494576000057</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1494576000057</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6633000" />
+    <option name="totallyTimeSpent" value="6951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
@@ -750,6 +742,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="cfg update" />
+    <option name="LAST_COMMIT_MESSAGE" value="cfg update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

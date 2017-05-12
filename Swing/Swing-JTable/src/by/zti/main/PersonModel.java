@@ -1,20 +1,13 @@
 package by.zti.main;
 
-import java.util.ArrayList;
-
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 public class PersonModel implements TableModel {
-	private ArrayList<TableModelListener> listeners;
-
-	public PersonModel() {
-		listeners = new ArrayList<TableModelListener>();
-	}
 
 	@Override
 	public void addTableModelListener(TableModelListener l) {
-		listeners.add(l);
+
 	}
 
 	@Override
@@ -67,7 +60,7 @@ public class PersonModel implements TableModel {
 
 	@Override
 	public void removeTableModelListener(TableModelListener l) {
-		listeners.remove(l);
+
 	}
 
 	@Override
